@@ -1,9 +1,9 @@
 <?php
 namespace App\classes;
 
-require_once "functions/insert.php";
-
 use PDO;
+use Faker\Factory;
+use App\classes\Ecole;
 
 class Database {
     
@@ -35,14 +35,14 @@ class Database {
                 nombre_eleve INT NOT NULL,
                 nombre_sport INT NOT NULL,
                 PRIMARY KEY(id)    
-            )";
+            )Engine=InnoDB";
 
             $sql2 = "CREATE TABLE IF NOT EXISTS sport(
                 id INT NOT NULL AUTO_INCREMENT,
-                sport_nom VARCHAR(20),
+                sport_nom VARCHAR(20) UNIQUE,
                 nombre_eleve INT NOT NULL,
                 PRIMARY KEY(id)
-                )";
+                )Engine=InnoDB";
 
             $sqlList = [$sql1, $sql2];
 
@@ -80,16 +80,87 @@ class Database {
         }
     }
 
-    public function insertData(PDO $pdo) {
-        insertForSchool($pdo);
-    }
+    public function insertDataIntoSchool(PDO $pdo) {
+        $faker = Factory::create();
 
-    public function getData(PDO $pdo) {
+        for($i = 0 ; $i < 3; $i++) {
+            $randoms[$i] = $faker->numberBetween(15, 100);
+        }
 
         try {
-            $sql = "SELECT ";
+            $sql = "INSERT IGNORE INTO ecole(ecole_nom, nombre_eleve, nombre_sport) VALUES ('Ecole A', '$randoms[0]', 5),
+            ('Ecole B', '$randoms[1]', 5),
+            ('Ecole C', '$randoms[2]', 5)";
+
+            $statement = $pdo->prepare($sql);
+            $statement->execute();
         } catch (\PDOException $e) {
             die($e->getMessage());
         }
+    }
+
+    /**
+     * Generate random number of students
+     * @param PDO $pdo
+     * @param Ecole $ecole
+     */
+    public function insertRandomStudentInSchool(PDO $pdo, Ecole $ecole) {
+        $faker = Factory::create();
+
+        $randNumber = $faker->numberBetween(15, 100);
+        $schooName = $ecole->getSchoolName();
+
+        try {
+            $sql = "UPDATE ecole SET nombre_eleve=$randNumber WHERE ecole_nom='$schooName'";
+
+            $statement = $pdo->prepare($sql);
+            $statement->execute();
+        } catch (\PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function insertDataIntoSport(PDO $pdo, Ecole $ecole) {
+        try {
+            // $sql = "INSERT IGNORE INTO sport(sport_nom, nombre_eleve) VALUES ('Boxe', '$randoms[0]'),
+            // ('Judo', '$randoms[1]', 5),
+            // ('Football, '$randoms[2]', 5),
+            // ('Natation, '$randoms[2]', 5),
+            // ('Cyclysme', '$randoms[2]', 5)";
+    
+            // $statement = $pdo->prepare($sql);
+            // $statement->execute();
+        } catch (\PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function getSchoolData(PDO $pdo){
+
+        try {
+            $sql = "SELECT ecole_nom, nombre_eleve, nombre_sport FROM ecole";
+
+            $statement = $pdo->prepare($sql);
+            $statement->execute();
+
+            $result = $statement->fetchAll();
+
+        } catch (\PDOException $e) {
+            die($e->getMessage());
+        }
+
+        if(isset($result)) {
+            foreach($result as $row) {
+                $schoolName = $row[0];
+                $studentsNumber = $row[1];
+                $sportNumber = $row[2];
+
+                $ecole = new Ecole($schoolName, $studentsNumber, $sportNumber);
+
+                $schoolList[] = $ecole;
+            }
+        }
+
+        return $schoolList;
     }
 }

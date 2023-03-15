@@ -1,5 +1,5 @@
 <?php 
-
+namespace App\classes;
 class Ecole {
 
     private string $schoolName;
