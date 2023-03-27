@@ -1,0 +1,27 @@
+.card {
+   background-color: #212529;
+   border-color: #484848;
+   box-shadow: 0 0 5px #484848;
+}
+
+.card-content {
+    padding: 10px;
+}
+
+.school-box,
+.sport-box
+{
+    display: flex;
+    flex-direction: column;
+    gap: 25px 0;
+}
+
+.header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+section h2 {
+    margin: 25px 0;
+    font-weight: 600;
+}

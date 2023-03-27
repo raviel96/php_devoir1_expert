@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Gestion Sort{% endblock %}
+
+{% block main %}
+    <section id="schools">
+                <h2>Nos écoles</h2>
+                <div class="school-box">
+                    {% for school in schoolList %}
+                        {% set schoolName = school.getSchoolName() %}
+
+                        <div class="card">
+                            {% if schoolName == "Ecole A" %}
+                                <img src="images/ecole-a.jpg" alt="image d'une école">
+                            {% elseif schoolName == "Ecole B"%}
+                                <img src="images/ecole-b.jpg" alt="image d'une école">
+                            {% elseif schoolName == "Ecole C"%}
+                                <img src="images/ecole-c.jpg" alt="image d'une école">
+                            {% endif %}
+
+                            <div class="card-content">
+                                <h3 class="card-title"> {{schoolName}} </h3>
+                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus voluptates, id ducimus inventore labore sint ipsa sunt natus amet excepturi ea qui aspernatur atque facilis veritatis molestias totam, cum quo.</p>    
+                                <a href="#" class="btn btn-primary">Plus d'infos</a>         
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+            <section id="sports">
+                <h2>Activités sportives</h2>
+                <div class="sport-box">
+                    {% for sport in sportList %}
+                        {% set sportName = sport.getSportName() %}                        
+
+                        <div class="card">
+
+                            {% if sportName == "Boxe" %} 
+                                <img class="card-img-top" src="images/boxe.jpg" alt=""> 
+                            {% elseif sportName == "Cyclisme" %}
+                                <img class="card-img-top" src="images/cyclisme.jpg" alt=""> 
+                            {% elseif sportName == "Football" %}
+                                <img class="card-img-top" src="images/football.jpg" alt=""> 
+                            {% elseif sportName == "Judo" %}
+                                <img class="card-img-top" src="images/judo.jpg" alt="">
+                            {% else %}
+                                 <img class="card-img-top" src="images/natation.jpg" alt="">
+                            {% endif %}
+                            
+                            <div class="card-content">
+                                <h3>{{sportName}}</h3>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, minima inventore. Vero quam, aliquam dicta ducimus consequuntur minus aperiam! Inventore rerum sequi nobis aperiam autem excepturi molestiae. Natus, non dicta!</p>
+                                <a href="#" class="btn btn-primary">Plus d'infos</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+{% endblock %}

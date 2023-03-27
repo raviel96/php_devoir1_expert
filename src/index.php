@@ -3,26 +3,29 @@ require_once "../vendor/autoload.php";
 require_once "functions/config.php";
 
 use Twig\Environment;
-use App\Model\Database;
+use App\models\Database;
 use Twig\Loader\FilesystemLoader;
 
 // Connexion
 $database = new Database();
 $pdo = Database::connexion($host, $user, $password, $dbname);
 
-
 $database->insertSchoolData($pdo);
 $database->insertSportData($pdo);
-$database->insertStudentData($pdo);
+if(count($database->getStudentData($pdo)) < 100 ) $database->insertStudentData($pdo);
 
 $schoolList = $database->getSchoolData($pdo);
 $sportList = $database->getSportData($pdo);
 
+$studentListAJoined = $database->getSchoolDataJoin($pdo, 1);
+$studentListBJoined = $database->getSchoolDataJoin($pdo, 2);
+$studentListCJoined = $database->getSchoolDataJoin($pdo, 3);
 
 // Twig
-$loader = new FilesystemLoader('View/');
+$loader = new FilesystemLoader('views/');
 $twig = new Environment($loader, [
     'cache' => false,
 ]);
 
-echo $twig->render('index.html.twig', ['name' => 'Fabien']);
+echo $twig->render('index.html.twig', 
+['schoolList' => $schoolList, 'sportList' => $sportList, 'studentList' => $studentListAJoined]);
