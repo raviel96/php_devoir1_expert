@@ -1,14 +1,13 @@
 {% extends "base.html" %}
 
-{% block title %}Gestion Sort{% endblock %}
+{% block title %}Gestion Sport{% endblock %}
 
 {% block main %}
-    <section id="schools">
+            <section id="schools">
                 <h2>Nos écoles</h2>
                 <div class="school-box">
                     {% for school in schoolList %}
                         {% set schoolName = school.getSchoolName() %}
-
                         <div class="card">
                             {% if schoolName == "Ecole A" %}
                                 <img src="images/ecole-a.jpg" alt="image d'une école">
@@ -20,7 +19,23 @@
 
                             <div class="card-content">
                                 <h3 class="card-title"> {{schoolName}} </h3>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus voluptates, id ducimus inventore labore sint ipsa sunt natus amet excepturi ea qui aspernatur atque facilis veritatis molestias totam, cum quo.</p>    
+                                 {% if schoolName == "Ecole A" %}
+                                    <p class="card-text">Effectif total : {{studentACount}} éleves</p>
+                                {% elseif schoolName == "Ecole B"%}
+                                    <p class="card-text">Effectif total : {{studentBCount}} éleves</p>
+                                {% elseif schoolName == "Ecole C"%}
+                                    <p class="card-text">Effectif total : {{studentCCount}} éleves</p>
+                                {% endif %}
+                                
+                                <p>Activités disponibles :</p>
+
+                                <div class="tags">
+                                    <a href="#boxe">Boxe</a>
+                                    <a href="#cyclisme">Cyclisme</a>
+                                    <a href="#football">Football</a>
+                                    <a href="#judo">Judo</a>
+                                    <a href="#natation">Natation</a>
+                                </div>
                                 <a href="#" class="btn btn-primary">Plus d'infos</a>         
                             </div>
                         </div>
@@ -36,15 +51,15 @@
                         <div class="card">
 
                             {% if sportName == "Boxe" %} 
-                                <img class="card-img-top" src="images/boxe.jpg" alt=""> 
+                                <img id="boxe" class="card-img-top nav-item" src="images/boxe.jpg" alt=""> 
                             {% elseif sportName == "Cyclisme" %}
-                                <img class="card-img-top" src="images/cyclisme.jpg" alt=""> 
+                                <img id="cyclisme" class="card-img-top nav-item" src="images/cyclisme.jpg" alt=""> 
                             {% elseif sportName == "Football" %}
-                                <img class="card-img-top" src="images/football.jpg" alt=""> 
+                                <img id="football" class="card-img-top nav-item" src="images/football.jpg" alt=""> 
                             {% elseif sportName == "Judo" %}
-                                <img class="card-img-top" src="images/judo.jpg" alt="">
+                                <img id="judo" class="card-img-top nav-item" src="images/judo.jpg" alt="">
                             {% else %}
-                                 <img class="card-img-top" src="images/natation.jpg" alt="">
+                                 <img id="natation" class="card-img-top nav-item" src="images/natation.jpg" alt="">
                             {% endif %}
                             
                             <div class="card-content">

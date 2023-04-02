@@ -21,6 +21,10 @@ $studentListAJoined = $database->getSchoolDataJoin($pdo, 1);
 $studentListBJoined = $database->getSchoolDataJoin($pdo, 2);
 $studentListCJoined = $database->getSchoolDataJoin($pdo, 3);
 
+$studentACount = count($studentListAJoined);
+$studentBCount = count($studentListBJoined);
+$studentCCount = count($studentListCJoined);
+
 // Twig
 $loader = new FilesystemLoader('views/');
 $twig = new Environment($loader, [
@@ -28,4 +32,4 @@ $twig = new Environment($loader, [
 ]);
 
 echo $twig->render('index.html.twig', 
-['schoolList' => $schoolList, 'sportList' => $sportList, 'studentList' => $studentListAJoined]);
+['schoolList' => $schoolList, 'sportList' => $sportList, 'studentACount' => $studentACount, 'studentBCount' => $studentBCount, 'studentCCount' => $studentCCount]);
