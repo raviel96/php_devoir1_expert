@@ -14,13 +14,8 @@ $database->insertSchoolData($pdo);
 $database->insertSportData($pdo);
 if(count($database->getStudentData($pdo)) < 100 ) $database->insertStudentData($pdo);
 
-$studentListAJoined = $database->getSchoolDataJoin($pdo, 1);
-$studentListBJoined = $database->getSchoolDataJoin($pdo, 2);
-$studentListCJoined = $database->getSchoolDataJoin($pdo, 3);
+$schoolList = $database->getSchoolData($pdo);
 
-$studentACount = count($studentListAJoined);
-$studentBCount = count($studentListBJoined);
-$studentCCount = count($studentListCJoined);
 
 ?>
 

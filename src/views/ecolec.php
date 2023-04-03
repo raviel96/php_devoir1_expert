@@ -8,15 +8,13 @@
     $pdo = Database::connexion($host, $user, $password, $dbname);
     
     $sportList = $database->getSportData($pdo);
-    $studentListJoined = $database->getSchoolDataJoin($pdo, 1);
-
-    var_dump($studentListJoined);
+    $studentListJoined = $database->getSchoolDataJoin($pdo, 3);
 ?>
 
 <?php include("header.php") ?>
 <main>
     <section>
-        <h1>Ecole A</h1>
+        <h1>Ecole C</h1>
         <div>
             <p>Effectif total</p>
             <p><?php echo count($studentListJoined) ?></p>
@@ -53,4 +51,3 @@
 </main>
 
 <?php include("footer.php") ?>
-
