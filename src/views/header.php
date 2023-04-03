@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css">
-    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Gestion Sport</title>
 </head>
 <body>
     <div class="container">
@@ -14,17 +14,7 @@
             <h1 id="home" class="text-center">Gestion Sport</h1>
             <nav>
                 <ul class="nav flex-column">
-                    <li class="nav-item"><a href="#home" class="nav-link active">Accueil</a></li>
-                    <li class="nav-item"><a href="#schools" class="nav-link">Nos écoles</a></li>
-                    <li class="nav-item"><a href="#sports" class="nav-link">Activités sportives</a></li>
+                    <li class="nav-item"><a href="../index.php" class="nav-link active">Accueil</a></li>
                 </ul>
             </nav>
         </header>
-        <main>{% block main %}{% endblock %}</main>
-        <footer class="footer d-flex justify-content-center align-item-center gap-4 p-4">
-            <a href="#">À propos</a>
-            <a href="#">Nous contacter</a>
-        </footer>
-    </div>
-</body>
-</html>

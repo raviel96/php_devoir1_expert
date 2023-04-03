@@ -1,3 +1,20 @@
+body {
+    background-color: #212529;
+}
+
+section h2 {
+    margin: 25px 0;
+    font-weight: 600;
+}
+
+a {
+    text-decoration: none;
+}
+
+p, h1,h2,h3 {
+    color: #fff!important;
+}
+
 .card {
    background-color: #212529;
    box-shadow: 0 0 5px #484848;
@@ -32,11 +49,15 @@
     font-weight: 700;
 }
 
-section h2 {
-    margin: 25px 0;
-    font-weight: 600;
-}
+@media (min-width:768px) {
+    .school-box, .sport-box {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap:15px;
+    }
 
-a {
-    text-decoration: none;
+    .header ul {
+        display: flex;
+        flex-direction: row !important;
+    }
 }
