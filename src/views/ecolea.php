@@ -9,20 +9,22 @@
     
     $sportList = $database->getSportData($pdo);
     $studentListJoined = $database->getSchoolDataJoin($pdo, 1);
-
-    var_dump($studentListJoined);
 ?>
 
 <?php include("header.php") ?>
 <main>
-    <section>
+    <section class="presentation">
         <h1>Ecole A</h1>
         <div>
             <p>Effectif total</p>
             <p><?php echo count($studentListJoined) ?></p>
         </div>
+        <div>
+            <p>Activités pratiquées</p>
+            <p><?php echo count($sportList) ?></p>
+        </div>
     </section>
-    <section>
+    <section class="">
         <h2>Sports proposés par cet établissement</h2>
         <?php foreach($sportList as $value):?>
             <div class="card">
