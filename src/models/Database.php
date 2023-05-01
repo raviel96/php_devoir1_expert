@@ -178,4 +178,17 @@ class Database {
             die($e->getMessage());
         }
     }
+
+    public function getSports(PDO $pdo, int $sportId, int $schoolId):array {
+        try {
+            $sql = "SELECT sport_id FROM eleve WHERE sport_id= $sportId AND ecole_id=$schoolId";
+
+            $statement = $pdo->prepare($sql);
+            $statement->execute();
+
+            return $statement->fetchAll();
+        } catch (\PDOException $e) {
+            die($e->getMessage());
+        }
+    }
 }

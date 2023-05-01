@@ -7,46 +7,83 @@
     $database = new Database();
     $pdo = Database::connexion($host, $user, $password, $dbname);
     
+    $schoolNumber = 2;
+
     $sportList = $database->getSportData($pdo);
-    $studentListJoined = $database->getSchoolDataJoin($pdo, 2);
+    $studentListJoined = $database->getSchoolDataJoin($pdo, $schoolNumber);
+
+    $boxList = $database->getSports($pdo, 1,$schoolNumber);
+    $judoList = $database->getSports($pdo, 2,$schoolNumber);
+    $footballList = $database->getSports($pdo, 3,$schoolNumber);
+    $natationList = $database->getSports($pdo, 4,$schoolNumber);
+    $cyclismeList = $database->getSports($pdo, 5,$schoolNumber);
+
+    $sortListB = [
+        count($boxList),
+        count($judoList),
+        count($footballList),
+        count($natationList),
+        count($cyclismeList)
+    ];
+
+    sort($sortListB);
 ?>
 
 <?php include("header.php") ?>
 <main>
-    <section>
+    <section class="presentation">
         <h1>Ecole B</h1>
-        <div>
-            <p>Effectif total</p>
-            <p><?php echo count($studentListJoined) ?></p>
+        <div class="details">
+            <div class="details-info">
+                <p>Effectif total</p>
+                <p><?php echo count($studentListJoined) ?></p>
+            </div>
+            <div class="details-info">
+                <p>Activités pratiquées</p>
+                <p><?php echo count($sportList) ?></p>
+            </div>
         </div>
     </section>
     <section>
         <h2>Sports proposés par cet établissement</h2>
-        <?php foreach($sportList as $value):?>
-            <div class="card">
-                <?php if($value->getSportName() == "Boxe"):?>
-                    <img src="../images/boxe.jpg" alt="image de la boxe" width="250" height="250">
-                    <h3>Boxe</h3>
-                <?php endif ?>
-                <?php if($value->getSportName() == "Judo"):?>
-                    <img src="../images/judo.jpg" alt="image de la boxe"  width="250" height="250">
-                    <h3>Judo</h3>
-                <?php endif ?>
-                <?php if($value->getSportName() == "Cyclisme"):?>
-                    <img src="../images/cyclisme.jpg" alt="image de la boxe"  width="250" height="250">
-                    <h3>Cyclisme</h3>
-                <?php endif ?>
-                <?php if($value->getSportName() == "Football"):?>
-                    <img src="../images/football.jpg" alt="image de la boxe"  width="250" height="250">
-                    <h3>Football</h3>
-                <?php endif ?>
-                <?php if($value->getSportName() == "Natation"):?>
-                    <img src="../images/natation.jpg" alt="image de la boxe"  width="250" height="250">
-                    <h3>Natation</h3>
-                <?php endif ?>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum laborum non laboriosam hic distinctio commodi?</p>
-            </div>
-        <?php endforeach;?>
+        <div class="sport-box">
+            <?php for($i = 0; $i < count($sortListB); $i++):?>
+                <div class="card">
+                <?php switch($i):
+                        case 0: ?>
+                            <div class="card-content">
+                                <h3>Boxe</h3>
+                                <p>Pratiquants : <?php echo $sortListB[$i];?></p>
+                            </div>
+                        <?php break;?>
+                        <?php case 1: ?>
+                            <div class="card-content">
+                                <h3>Judo</h3>
+                                <p>Pratiquants : <?php echo $sortListB[$i];?></p>
+                            </div>
+                        <?php break;?>
+                        <?php case 2: ?>
+                            <div class="card-content">
+                                <h3>Football</h3>
+                                <p>Pratiquants : <?php echo $sortListB[$i];?></p>
+                            </div>
+                        <?php break;?>
+                        <?php case 3: ?>
+                            <div class="card-content">
+                                <h3>Natation</h3>
+                                <p>Pratiquants : <?php echo $sortListB[$i];?></p>
+                            </div>
+                        <?php break;?>
+                        <?php case 4: ?>
+                            <div class="card-content">
+                                <h3>Cyclisme</h3>
+                                <p>Pratiquants : <?php echo $sortListB[$i];?></p>
+                            </div>
+                        <?php break;?>
+                    <?php endswitch;?>
+                </div>
+            <?php endfor;?>
+        </div>
     </section>
 </main>
 

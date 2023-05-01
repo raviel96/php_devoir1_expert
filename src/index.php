@@ -2,9 +2,7 @@
 require_once "../vendor/autoload.php";
 require_once "functions/config.php";
 
-use Twig\Environment;
 use App\models\Database;
-use Twig\Loader\FilesystemLoader;
 
 // Connexion
 $database = new Database();
